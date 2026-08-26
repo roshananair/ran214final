@@ -32,3 +32,5 @@ moving_average <- function(site_data) {
 
   return(result)
 }
+
+#edit to add to branch 2
