@@ -46,5 +46,3 @@ prm_longer |>
 ##### Need to implement the 9-day moving average!!!
 
 #### This is the edit I am making to "edit a line on the remote server"! ON SERVER
-
-# edit to add to branch2
