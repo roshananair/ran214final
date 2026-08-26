@@ -21,7 +21,7 @@ moving_average <- function(site_data) {
     mg_window <- site_data$Mg[in_window]
     no3_window <- site_data$`NO3-N`[in_window]
     nh4_window <- site_data$`NH4-N`[in_window]
-    # The line above gets potassium in the window. Get the rest of the ions too
+    # The line above gets potassium in the window. Get the rest of the ions too#
     # Calculate the mean of each ion concentration and fill in the result
     result$k_mean[i] <- mean(k_window, na.rm = TRUE)
     result$ca_mean[i] <- mean(ca_window, na.rm = TRUE)
