@@ -45,7 +45,7 @@
 ### References
 #### In an appropriate, consistent format, including links.
 #### Don’t forget to add references for datasets too.
-##### NOT YET: References are included but doi link for publication not functional.
+##### MEETS SPEC: References with links are standard and included.
 ## Code follows a professional style
 ### All code files follow a consistent style (the Air formatter automates this).
 #### NOT YET: Air format used but inconsistent commenting and titles etc. Needs revision. 
