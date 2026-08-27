@@ -24,28 +24,23 @@ bq3 <- bq3_data |>
 
 
 # Finding moving averages ---------------------------------------
-
 ma_prm <- moving_average(site_data = prm)
 ma_bq1 <- moving_average(site_data = bq1)
 ma_bq2 <- moving_average(site_data = bq2)
 ma_bq3 <- moving_average(site_data = bq3)
 
+
+# Combining moving average frames ----------------------------------------
 combined <- bind_rows(ma_prm, ma_bq1, ma_bq2, ma_bq3)
 
+
+# Pivoting longer --------------------------------------------------------
 combined_long <-
   pivot_longer(
     combined,
     cols = 3:7,
     names_to = "Chemical",
-    values_to = "Concentration"
+    values_to = "[Concentration]"
   )
 
-# Plotting ---------------------------------------------------------------
-combined_long |>
-  ggplot(
-    mapping = aes(x = window_start, y = Concentration, linetype = Site)
-  ) +
-  geom_line() +
-  theme_bw() +
-  facet_grid(vars(Chemical), scales = "free_y", switch = "y") +
-  scale_x_date(name = "Year", sec.axis = dup_axis())
+write_csv(combined_long, "output/clean_data.csv")

@@ -3,6 +3,7 @@ moving_average <- function(site_data) {
   # Initialize a tibble to contain the results
   result <- tibble(
     window_start = seq(ymd("1988-01-01"), ymd("1994-12-31"), by = "9 weeks"),
+    Site = site_data$Sample_ID[1],
     k_mean = NA,
     mg_mean = NA,
     ca_mean = NA,
@@ -26,8 +27,8 @@ moving_average <- function(site_data) {
     result$k_mean[i] <- mean(k_window, na.rm = TRUE)
     result$ca_mean[i] <- mean(ca_window, na.rm = TRUE)
     result$mg_mean[i] <- mean(mg_window, na.rm = TRUE)
-    result$nh4_mean[i] <- mean(no3_window, na.rm = TRUE)
-    result$no3_mean[i] <- mean(nh4_window, na.rm = TRUE)
+    result$nh4_mean[i] <- mean(nh4_window, na.rm = TRUE)
+    result$no3_mean[i] <- mean(no3_window, na.rm = TRUE)
   }
 
   return(result)
