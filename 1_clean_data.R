@@ -1,6 +1,6 @@
 # Library and Reading .CSVs
 library(tidyverse)
-source("R/moving-average3.R")
+source("R/moving-average.R")
 
 prm_data <- read_csv("data/knb-lter-luq.20.4923064/RioMameyesPuenteRoto.csv")
 bq1_data <- read_csv("data/knb-lter-luq.20.4923064/QuebradaCuenca1-Bisley.csv")
