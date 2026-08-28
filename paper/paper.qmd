@@ -15,7 +15,7 @@ Data is sourced from:
 TMcDowell, W. and International Institute of Tropical Forestry(IITF), USDA Forest Service.. 2024. Chemistry of stream water from the Luquillo Mountains ver 4923064. Environmental Data Initiative. https://doi.org/10.6073/pasta/f31349bebdc304f758718f4798d25458.
 
 # Methods
-Describe moving average
+Moving Average Function: Created a function for taking the 9 week moving average for each chemical concentration. First, a table was created containing columns for the site, each chemical, and the start date for each 9 week window. Then, the concentration samples that fell within each 9 week window were averaged by chemical and added to the table. This table was written into a .csv file to plot the figure. 
 
 # Results
 ```{r}
