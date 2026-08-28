@@ -24,8 +24,11 @@ Variables Used: Sample_ID (Site Name), Sample_Date (YYYY-MM-DD), K (mg/l), NO3-N
 
 # 3) Scripts
 [Moving Average Function](R/moving-average3.R)
+
 [Data Cleaning Script](1_clean_data.R)
+
 [Scratch Code](scratch/scratch3.R)
+
 [Markdown](paper/paper.qmd)
 
 # 3) Authors
