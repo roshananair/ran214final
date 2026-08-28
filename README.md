@@ -2,6 +2,7 @@
 
 # 1) Repository
 Purpose: To recreate Figure 3 from: Schaefer et al. (2000)
+
 Contains: 
  - R/moving-average3.R : Function to calculate 9 week moving averages of chemical concentrations
  - data/knb-lter-luq.20.4923064/ : Contains the 4 .csv files containing data from each of the 4 sites for this figure
@@ -32,7 +33,7 @@ Variables Used: Sample_ID (Site Name), Sample_Date (YYYY-MM-DD), K (mg/l), NO3-N
 [Markdown](paper/paper.qmd)
 
 # 3) Authors
-[Roshan Andres Nair GitHub]([url](https://github.com/roshananair))
+[Roshan Andres Nair GitHub]([url]https://github.com/roshananair)
 
 # 4) References
 1. McDowell, W. and International Institute of Tropical Forestry(IITF), USDA Forest Service.. 2024. Chemistry of stream water from the Luquillo Mountains ver 4923064. Environmental Data Initiative. https://doi.org/10.6073/pasta/f31349bebdc304f758718f4798d25458. 
