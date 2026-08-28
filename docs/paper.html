@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Roshan Andres Nair">
 
 <title>Hurricane effects on stream chemistry</title>
 <style>
@@ -25,41 +26,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -94,6 +60,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Roshan Andres Nair </p>
+          </div>
+  </div>
     
   
     
@@ -106,217 +78,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="background" class="level1">
 <h1>Background</h1>
-<p>This project recreated figure three from Scafeer et al.&nbsp;(2000) (Correct this!!!)</p>
+<p>This project recreated Figure 3 from:</p>
+<p>Schaefer, Douglas. A., William H. McDowell, Fredrick N. Scatena, and Clyde E. Asbury. 2000. “Effects of Hurricane Disturbance on Stream Water Concentrations and Fluxes in Eight Tropical Forest Watersheds of the Luquillo Experimental Forest, Puerto Rico.” Journal of Tropical Ecology 16 (2): 189–207. https://doi.org/10.1017/s0266467400001358.</p>
 </section>
 <section id="data" class="level1">
 <h1>Data</h1>
-<p>The data is read in in four csv files from EDI and then the columns needed for analysis are selected.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.6
-✔ forcats   1.0.1     ✔ stringr   1.6.0
-✔ ggplot2   4.0.1     ✔ tibble    3.3.0
-✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-✔ purrr     1.2.0     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>prm_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../data/knb-lter-luq.20.4923064/RioMameyesPuenteRoto.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 1657 Columns: 39
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr   (8): Sample_ID, NitrateCode, SulfateCode, NH4Code, PO4Code, TDNCode, S...
-dbl  (21): Code, Sample_Time, Gage_Ht, Temp, pH, Cond, Cl, NO3-N, SO4-S, Na,...
-lgl   (9): TDP, ChlorideCode, SodiumCode, PotassiumCode, MagnesiumCode, Calc...
-date  (1): Sample_Date
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>bq1_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"../data/knb-lter-luq.20.4923064/QuebradaCuenca1-Bisley.csv"</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: One or more parsing issues, call `problems()` on your data frame for details,
-e.g.:
-  dat &lt;- vroom(...)
-  problems(dat)</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 1847 Columns: 39
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr   (8): Sample_ID, NitrateCode, SulfateCode, NH4Code, PO4Code, DOCCode, T...
-dbl  (21): Code, Sample_Time, Gage_Ht, Temp, pH, Cond, Cl, NO3-N, SO4-S, Na,...
-lgl   (9): TDP, ChlorideCode, SodiumCode, PotassiumCode, MagnesiumCode, Calc...
-date  (1): Sample_Date
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>bq2_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"../data/knb-lter-luq.20.4923064/QuebradaCuenca2-Bisley.csv"</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 1838 Columns: 39
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr   (9): Sample_ID, NitrateCode, SulfateCode, PotassiumCode, NH4Code, PO4C...
-dbl  (21): Code, Sample_Time, Gage_Ht, Temp, pH, Cond, Cl, NO3-N, SO4-S, Na,...
-lgl   (8): TDP, ChlorideCode, SodiumCode, MagnesiumCode, CalciumCode, DICCod...
-date  (1): Sample_Date
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>bq3_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"../data/knb-lter-luq.20.4923064/QuebradaCuenca3-Bisley.csv"</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 1835 Columns: 39
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr   (9): Sample_ID, NitrateCode, SulfateCode, NH4Code, PO4Code, DOCCode, T...
-dbl  (21): Code, Sample_Time, Gage_Ht, Temp, pH, Cond, Cl, NO3-N, SO4-S, Na,...
-lgl   (8): TDP, ChlorideCode, SodiumCode, PotassiumCode, MagnesiumCode, Calc...
-date  (1): Sample_Date
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pulling out columns for figure -----------------------------------------</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>prm <span class="ot">&lt;-</span> prm_data <span class="sc">|&gt;</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">"Sample_ID"</span>, <span class="st">"Sample_Date"</span>, <span class="st">"NO3-N"</span>, <span class="st">"Mg"</span>, <span class="st">"Ca"</span>, <span class="st">"NH4-N"</span>, <span class="st">"K"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows: 1,657
-Columns: 7
-$ Sample_ID   &lt;chr&gt; "MPR", "MPR", "MPR", "MPR", "MPR", "MPR", "MPR", "MPR", "M…
-$ Sample_Date &lt;date&gt; 1989-05-16, 1989-05-23, 1989-05-30, 1989-06-06, 1989-06-1…
-$ `NO3-N`     &lt;dbl&gt; 69, 69, 79, 85, 70, 71, NA, 10, 24, 10, 90, 183, 41, 114, …
-$ Mg          &lt;dbl&gt; 1.92, 2.41, 1.60, 1.69, 2.06, 1.98, 3.31, 0.82, 1.85, 1.50…
-$ Ca          &lt;dbl&gt; 6.15, 7.17, 5.19, 6.60, 6.66, 7.64, 7.83, 3.17, 7.94, 6.95…
-$ `NH4-N`     &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
-$ K           &lt;dbl&gt; 0.77, 0.72, 0.70, 0.59, 0.65, 0.66, 0.70, 0.62, 0.76, 0.69…</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>bq1 <span class="ot">&lt;-</span> bq1_data <span class="sc">|&gt;</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">"Sample_ID"</span>, <span class="st">"Sample_Date"</span>, <span class="st">"NO3-N"</span>, <span class="st">"Mg"</span>, <span class="st">"Ca"</span>, <span class="st">"NH4-N"</span>, <span class="st">"K"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows: 1,847
-Columns: 7
-$ Sample_ID   &lt;chr&gt; "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1"…
-$ Sample_Date &lt;date&gt; 1986-05-20, 1986-05-27, 1986-06-03, 1986-10-21, 1986-10-2…
-$ `NO3-N`     &lt;dbl&gt; 118, 109, 114, 124, NA, NA, 103, 153, 264, 158, 106, 146, …
-$ Mg          &lt;dbl&gt; 3.04, 3.13, 3.15, 2.73, 2.86, 2.80, 2.40, 2.66, 1.19, 2.43…
-$ Ca          &lt;dbl&gt; 4.26, 3.17, 4.38, 4.91, 4.60, 4.45, 3.93, 3.95, 2.11, 3.95…
-$ `NH4-N`     &lt;dbl&gt; NA, NA, NA, 10, 40, 10, 47, 20, NA, 16, 10, 10, 23, 20, 36…
-$ K           &lt;dbl&gt; 0.81, 0.82, 0.82, 0.65, 0.62, 0.64, 0.69, 0.68, 0.77, 0.66…</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>bq2 <span class="ot">&lt;-</span> bq2_data <span class="sc">|&gt;</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">"Sample_ID"</span>, <span class="st">"Sample_Date"</span>, <span class="st">"NO3-N"</span>, <span class="st">"Mg"</span>, <span class="st">"Ca"</span>, <span class="st">"NH4-N"</span>, <span class="st">"K"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows: 1,838
-Columns: 7
-$ Sample_ID   &lt;chr&gt; "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2"…
-$ Sample_Date &lt;date&gt; 1986-05-20, 1986-05-27, 1986-06-03, 1986-10-21, 1986-10-2…
-$ `NO3-N`     &lt;dbl&gt; 225, 195, 206, 206, 47, 114, 313, 353, 414, 262, 249, 240,…
-$ Mg          &lt;dbl&gt; 2.86, 3.17, 2.98, 2.43, 2.51, 2.62, 2.19, 2.40, 1.31, 2.46…
-$ Ca          &lt;dbl&gt; 5.38, 5.34, 3.98, 5.10, 5.04, 4.98, 4.79, 4.82, 3.20, 4.87…
-$ `NH4-N`     &lt;dbl&gt; NA, NA, NA, 9, 34, 10, 34, 26, NA, 12, 11, 10, 23, 20, 25,…
-$ K           &lt;dbl&gt; 0.82, 0.78, 0.77, 0.71, 0.73, 0.68, 0.74, 0.72, 0.92, 0.68…</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>bq3 <span class="ot">&lt;-</span> bq3_data <span class="sc">|&gt;</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">"Sample_ID"</span>, <span class="st">"Sample_Date"</span>, <span class="st">"NO3-N"</span>, <span class="st">"Mg"</span>, <span class="st">"Ca"</span>, <span class="st">"NH4-N"</span>, <span class="st">"K"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows: 1,835
-Columns: 7
-$ Sample_ID   &lt;chr&gt; "Q3", "Q3", "Q3", "Q3", "Q3", "Q3", "Q3", "Q3", "Q3", "Q3"…
-$ Sample_Date &lt;date&gt; 1986-05-20, 1986-05-27, 1986-06-03, 1986-10-21, 1986-10-2…
-$ `NO3-N`     &lt;dbl&gt; 116, 124, 119, 195, NA, 99, 182, 170, 262, 166, 156, 172, …
-$ Mg          &lt;dbl&gt; 3.18, 3.66, 3.46, 2.48, 2.81, 2.99, 2.17, 2.58, 1.56, 2.46…
-$ Ca          &lt;dbl&gt; 3.86, 3.97, 4.03, 3.52, 3.88, 3.84, 3.03, 3.76, 2.47, 3.14…
-$ `NH4-N`     &lt;dbl&gt; NA, NA, NA, 10, 36, 24, 25, 28, NA, 11, 11, 8, 19, 22, 20,…
-$ K           &lt;dbl&gt; 0.71, 0.71, 0.69, 0.50, 0.59, 0.61, 0.54, 0.59, 0.63, 0.56…</code></pre>
-</div>
-</div>
+<p>Data is sourced from:</p>
+<p>TMcDowell, W. and International Institute of Tropical Forestry(IITF), USDA Forest Service.. 2024. Chemistry of stream water from the Luquillo Mountains ver 4923064. Environmental Data Initiative. https://doi.org/10.6073/pasta/f31349bebdc304f758718f4798d25458.</p>
 </section>
 <section id="methods" class="level1">
 <h1>Methods</h1>
-<p>The following methods take the moving 9 week average of each ion concentration and add them to a new table, pivot, then plot that table. This DOES NOT use the moving average function created prior.</p>
+<p>Moving Average Function: Created a function for taking the 9 week moving average for each chemical concentration. First, a table was created containing columns for the site, each chemical, and the start date for each 9 week window. Then, the concentration samples that fell within each 9 week window were averaged by chemical and added to the table. This table was written into a .csv file to plot the figure.</p>
+</section>
+<section id="results" class="level1">
+<h1>Results</h1>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_windows =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">41</span>),</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">k_mean =</span> <span class="cn">NA</span>,</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mg_mean =</span> <span class="cn">NA</span>,</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">ca_mean =</span> <span class="cn">NA</span>,</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">nh4_mean =</span> <span class="cn">NA</span>,</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">no3_mean =</span> <span class="cn">NA</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">"start"</span> <span class="ot">=</span> <span class="fu">seq</span>(<span class="fu">ymd</span>(<span class="st">"1988-01-01"</span>), <span class="fu">ymd</span>(<span class="st">"1994-12-31"</span>), <span class="at">by =</span> <span class="st">"9 weeks"</span>))</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(means)) {</span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>  w1 <span class="ot">&lt;-</span> means<span class="sc">$</span>start[i]</span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>  w2 <span class="ot">&lt;-</span> w1 <span class="sc">+</span> <span class="dv">63</span></span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  k <span class="ot">&lt;-</span> prm<span class="sc">$</span>K[prm<span class="sc">$</span>Sample_Date <span class="sc">&gt;=</span> w1 <span class="sc">&amp;</span> prm<span class="sc">$</span>Sample_Date <span class="sc">&lt;</span> w2]</span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>  mg <span class="ot">&lt;-</span> prm<span class="sc">$</span>Mg[</span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>    prm<span class="sc">$</span>Sample_Date <span class="sc">&gt;=</span> w1 <span class="sc">&amp;</span> prm<span class="sc">$</span>Sample_Date <span class="sc">&lt;</span> w2</span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>  ]</span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>  ca <span class="ot">&lt;-</span> prm<span class="sc">$</span>Ca[</span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>    prm<span class="sc">$</span>Sample_Date <span class="sc">&gt;=</span> w1 <span class="sc">&amp;</span> prm<span class="sc">$</span>Sample_Date <span class="sc">&lt;</span> w2</span>
-<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>  ]</span>
-<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>  nh4 <span class="ot">&lt;-</span> prm<span class="sc">$</span><span class="st">`</span><span class="at">NH4-N</span><span class="st">`</span>[</span>
-<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>    prm<span class="sc">$</span>Sample_Date <span class="sc">&gt;=</span> w1 <span class="sc">&amp;</span> prm<span class="sc">$</span>Sample_Date <span class="sc">&lt;</span> w2</span>
-<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>  ]</span>
-<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>  no3 <span class="ot">&lt;-</span> prm<span class="sc">$</span><span class="st">`</span><span class="at">NO3-N</span><span class="st">`</span>[</span>
-<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>    prm<span class="sc">$</span>Sample_Date <span class="sc">&gt;=</span> w1 <span class="sc">&amp;</span> prm<span class="sc">$</span>Sample_Date <span class="sc">&lt;</span> w2</span>
-<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>  ]</span>
-<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>  means<span class="sc">$</span>k_mean[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(k, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>  means<span class="sc">$</span>mg_mean[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(mg, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>  means<span class="sc">$</span>ca_mean[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(ca, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>  means<span class="sc">$</span>nh4_mean[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(nh4, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>  means<span class="sc">$</span>no3_mean[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(no3, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>prm_longer <span class="ot">&lt;-</span></span>
-<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>    means,</span>
-<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>,</span>
-<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"chemical"</span>,</span>
-<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"concentration"</span></span>
-<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting ---------------------------------------------------------------</span></span>
-<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a>prm_longer <span class="sc">|&gt;</span></span>
-<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
-<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> start, <span class="at">y =</span> concentration, <span class="at">color =</span> chemical)</span>
-<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>chemical, <span class="at">ncol =</span> <span class="dv">1</span>, <span class="at">scales =</span> <span class="st">"free_y"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 69 rows containing missing values or values outside the scale range
-(`geom_line()`).</code></pre>
-</div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="paper_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="paper_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-<section id="results" class="level1">
-<h1>Results</h1>
 </section>
 
 </main>
