@@ -1,6 +1,5 @@
 ---
 title: "Hurricane effects on stream chemistry"
-#subtitle: "Recreating Fig. 3 from Schaefer et al. (2000)
 format: html
 ---
 

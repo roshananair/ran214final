@@ -33,7 +33,6 @@ ma_bq3 <- moving_average(site_data = bq3)
 # Combining moving average frames ----------------------------------------
 combined <- bind_rows(ma_prm, ma_bq1, ma_bq2, ma_bq3)
 
-
 # Pivoting longer --------------------------------------------------------
 combined_long <-
   pivot_longer(
