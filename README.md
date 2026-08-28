@@ -1,7 +1,19 @@
 # Hurricane effects on stream chemistry
-Recreation of Figure 3 from: Schaefer Douglas A, McDowell WH, Scatena FN, Asbury CE. Effects of hurricane disturbance on stream water concentrations and fluxes in eight tropical forest watersheds of the Luquillo Experimental Forest, Puerto Rico. Journal of Tropical Ecology. 2000;16(2):189-207. doi:10.1017/S0266467400001358.
 
-# 1) Data
+# 1) Repository
+Purpose: To recreate Figure 3 from: Schaefer et al. (2000)
+Contains: 
+ - R/moving-average3.R : Function to calculate 9 week moving averages of chemical concentrations
+ - data/knb-lter-luq.20.4923064/ : Contains the 4 .csv files containing data from each of the 4 sites for this figure
+    - QuebradaCuenca1-Bisley.csv
+    - QuebradaCuenca2-Bisley.csv
+    - QuebradaCuenca2-Bisley.csv
+    - RioMameyesPuenteRoto.csv
+ - 1_clean_data.R : Script containing data reading and cleaning, uses moving average function from moving-average3.R, writes clean_data.csv
+ - output/clean_data.csv : .csv file of clean data, created using script 1_clean_data.R, and contains cols window_start, Site, Chemical, and Concentration, the     latter holds calculates 9 week moving averages
+ - paper/paper.qmd : Markdown file for generating .html
+
+# 2) Data
 Luquillo Experimental Forest (LEF) Long Term Ecological Research (LTER)
 
 Data Access: McDowell, W. and International Institute of Tropical Forestry(IITF), USDA Forest Service.. 2024. Chemistry of stream water from the Luquillo Mountains ver 4923064. Environmental Data Initiative. https://doi.org/10.6073/pasta/f31349bebdc304f758718f4798d25458. 
@@ -10,11 +22,14 @@ Download: Download and unzip the Full Data Package (Zip) [[knb-lter-luq.20.49230
 
 Variables Used: Sample_ID (Site Name), Sample_Date (YYYY-MM-DD), K (mg/l), NO3-N (ug/l), Mg (mg/l), Ca (mg/l), NH4-N (ug/l).
 
-# 2) Scripts
-[Current in progress R script](scratch/scratch.R)
+# 3) Scripts
+[Moving Average Function](R/moving-average3.R)
+[Data Cleaning Script](1_clean_data.R)
+[Scratch Code](scratch/scratch3.R)
+[Markdown](paper/paper.qmd)
 
 # 3) Authors
-Roshan Andres Nair
+[Roshan Andres Nair GitHub]([url](https://github.com/roshananair))
 
 # 4) References
 1. McDowell, W. and International Institute of Tropical Forestry(IITF), USDA Forest Service.. 2024. Chemistry of stream water from the Luquillo Mountains ver 4923064. Environmental Data Initiative. https://doi.org/10.6073/pasta/f31349bebdc304f758718f4798d25458. 
