@@ -1,4 +1,4 @@
-# Library and Reading CSVs ----------------------------------------------
+# Library and Reading .CSVs
 library(tidyverse)
 source("R/moving-average3.R")
 
@@ -8,7 +8,7 @@ bq2_data <- read_csv("data/knb-lter-luq.20.4923064/QuebradaCuenca2-Bisley.csv")
 bq3_data <- read_csv("data/knb-lter-luq.20.4923064/QuebradaCuenca3-Bisley.csv")
 
 
-# Pulling out columns for figure -----------------------------------------
+# Pulling out columns needed for analysis and figure
 prm <- prm_data |>
   select("Sample_ID", "Sample_Date", `NO3-N`, "Mg", "Ca", `NH4-N`, "K") |>
   glimpse()
@@ -23,23 +23,24 @@ bq3 <- bq3_data |>
   glimpse()
 
 
-# Finding moving averages ---------------------------------------
+# Finding moving averages for each site
 ma_prm <- moving_average(site_data = prm)
 ma_bq1 <- moving_average(site_data = bq1)
 ma_bq2 <- moving_average(site_data = bq2)
 ma_bq3 <- moving_average(site_data = bq3)
 
 
-# Combining moving average frames ----------------------------------------
+# Combining moving average frames by row
 combined <- bind_rows(ma_prm, ma_bq1, ma_bq2, ma_bq3)
 
-# Pivoting longer --------------------------------------------------------
+# Pivoting longer to prep for visualization
 combined_long <-
   pivot_longer(
     combined,
-    cols = 3:7,
+    cols = 3:7, # Chemical cols
     names_to = "Chemical",
-    values_to = "[Concentration]"
+    values_to = "Concentration"
   )
 
+# Writing the combined_long frame as .csv into the output folder
 write_csv(combined_long, "output/clean_data.csv")

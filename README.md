@@ -1,7 +1,7 @@
 # Hurricane effects on stream chemistry
 
 # 1) Repository
-Purpose: To recreate Figure 3 from: Schaefer et al. (2000)
+Purpose: To recreate Figure 3 from: Schaefer et al. (2000).
 
 Contains: 
  - R/moving-average3.R : Function to calculate 9 week moving averages of chemical concentrations
