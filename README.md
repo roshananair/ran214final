@@ -13,6 +13,7 @@ Contains:
  - 1_clean_data.R : Script containing data reading and cleaning, uses moving average function from moving-average3.R, writes clean_data.csv
  - output/clean_data.csv : .csv file of clean data, created using script 1_clean_data.R, and contains cols window_start, Site, Chemical, and Concentration, the     latter holds calculates 9 week moving averages
  - paper/paper.qmd : Markdown file for generating .html
+ - docs/paper.html : .html file for paper.qmd
 
 # 2) Data
 Luquillo Experimental Forest (LEF) Long Term Ecological Research (LTER)
